@@ -6,6 +6,9 @@
 
 require 'cucumber/rails'
 
+# Added this line 8/27/12 to deal with "undefined method 'should'" when running cucumber tests
+require 'rspec/expectations'
+
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
 # prefer to use XPath just remove this line and adjust any selectors in your
