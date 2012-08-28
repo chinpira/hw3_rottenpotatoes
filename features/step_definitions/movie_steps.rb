@@ -17,7 +17,7 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
-  flunk "Unimplemented"
+  page.body.should =~ /#{e1}.*#{e2}/m
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -64,3 +64,7 @@ end
 Then /I should see none of the movies/ do
   (page.all("table#movies tr").count - 1).should == 0
 end
+
+#Then /I should see "([^"]+)" before "([^"]+)"/ do |first_item, second_item|
+#  page.all("table#movies") =~ /#{first_item}.*#{second_item}/
+#end
