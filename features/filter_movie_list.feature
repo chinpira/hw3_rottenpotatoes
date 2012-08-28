@@ -47,7 +47,9 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
 
 Scenario: no ratings selected
   # see assignment
-  
+  When I uncheck all of the ratings
+  And I press "ratings_submit"
+  Then I should see none of the movies
   
 Scenario: all ratings selected
   # see assignment

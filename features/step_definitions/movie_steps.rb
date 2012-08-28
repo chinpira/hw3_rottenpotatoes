@@ -42,11 +42,16 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   end
 end
 
-When /I check all of the ratings/ do
+When /I (un)?check all of the ratings/ do |uncheck|
   ratings_list = Movie.all_ratings
   ratings_list.each do |rating|
-    puts "Checking rating: ratings_" + rating
-    check("ratings_" + rating)
+    if uncheck.nil?
+      puts "Checking rating: ratings_" + rating
+      check("ratings_" + rating)
+    else
+      puts "Unchecking rating: ratings_" + rating
+      uncheck("ratings_" + rating)
+    end
   end
 end
 
@@ -54,4 +59,8 @@ Then /I should see all of the movies/ do
   movie_count = Movie.count(:title)
   puts "Total number of movies in database: #{movie_count}"
   (page.all("table#movies tr").count - 1).should == movie_count
+end
+
+Then /I should see none of the movies/ do
+  (page.all("table#movies tr").count - 1).should == 0
 end
